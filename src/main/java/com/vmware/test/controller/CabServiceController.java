@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -29,30 +28,24 @@ public class CabServiceController {
 	public String registerCab(@RequestBody Cab cab) {
 
 		boolean status = service.registerCab(cab);
-		if (status) {
-			logger.info("Registration Successful");
-			return "Registration Successful";
-		} else {
-			return "Registration unsuccessful";
-		}
+		return getString(status);
 	}
 
 	@PostMapping("/register/driver")
 	public String registerDriver(@RequestBody Driver driver) {
 
 		boolean status = service.registerDriver(driver);
-		if (status) {
-			logger.info("Registration Successful");
-			return "Registration Successful";
-		} else {
-			return "Registration unsuccessful";
-		}
+		return getString(status);
 	}
 
 	@PostMapping("/register/user")
 	public String registerUser(@RequestBody User user) {
 
 		boolean status = service.registerUser(user);
+		return getString(status);
+	}
+
+	private String getString(boolean status) {
 		if (status) {
 			logger.info("Registration Successful");
 			return "Registration Successful";
